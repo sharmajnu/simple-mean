@@ -1,2 +1,2 @@
 # simple-mean
-This is a starter project on with MEAN stack. 
+This is a starter project with MEAN stack. 
