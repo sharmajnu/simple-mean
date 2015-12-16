@@ -6,7 +6,6 @@ angular.module('myApp', [
   'satellizer',
   'myApp.view1',
   'myApp.view2',
-  'myApp.version',
   'myApp.details'
 
 ]).

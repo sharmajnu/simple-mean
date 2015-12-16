@@ -4,7 +4,7 @@ angular.module('myApp.details', ['ngRoute'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/details', {
-            templateUrl: 'details/details.html',
+            templateUrl: '/components/details/details.html',
             controller: 'Details'
         });
     }])
