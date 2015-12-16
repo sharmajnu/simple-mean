@@ -14,6 +14,9 @@
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="login.css">
+
   <style>
     body {
       padding-top: 70px;
@@ -39,7 +42,7 @@
       <a class="navbar-brand" href="#/">Angular with Bootstrap</a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div style="float: left" class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li>
           <a href="#/view1">view1</a>
@@ -49,6 +52,13 @@
         </li>
       </ul>
     </div>
+    <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-2">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="#/view2">Login</a>
+        </li>
+        </ul>
+      </div>
     <!-- /.navbar-collapse -->
   </div>
   <!-- /.container -->
@@ -64,8 +74,10 @@
 
 <footer class="site-footer" role="contentinfo">
   <div class="container">
-    <div class="row">
-      <p>This is startup site with angular and bootstrap<hr/></p>
+    <p class="row">
+      <p>This is startup site with angular and bootstrap
+      <hr/>
+      </p>
       <p>Angular/Bootstrap 2015</p>
     </div>
   </div>
@@ -79,6 +91,7 @@
 <script src="bower_components/bootstrap/dist/JS/bootstrap.min.js"></script>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/satellizer/satellizer.min.js"></script>
 <script src="app.js"></script>
 <script src="view1/view1.js"></script>
 <script src="view2/view2.js"></script>
@@ -87,5 +100,6 @@
 <script src="components/version/version.js"></script>
 <script src="components/version/version-directive.js"></script>
 <script src="components/version/interpolate-filter.js"></script>
+
 </body>
 </html>

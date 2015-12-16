@@ -9,7 +9,7 @@ angular.module('myApp.view1', ['ngRoute'])
   });
 }])
 
-.controller('View1Ctrl', ['$scope', '$http', function($scope, $http) {
+.controller('View1Ctrl', ['$scope', '$http', '$auth', function($scope, $http, $auth) {
 
       $scope.message = "hello angular";
       $scope.products = {};
@@ -23,6 +23,10 @@ angular.module('myApp.view1', ['ngRoute'])
       }, function errorCallback(response) {
 
       });
+        
+        $scope.authenticate = function (provider) {
+            $auth.authenticate(provider);
+        }
 
 }]);
 
