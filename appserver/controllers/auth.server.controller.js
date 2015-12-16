@@ -5,6 +5,7 @@ var express = require('express');
 var request = require('request');
 var userController = require('./user.server.controller.js');
 var router = express.Router();
+var jwt = require('jwt-simple');
 
 var config = require('../config/config.js');
 
@@ -17,14 +18,14 @@ router.post('/google', function (req, res) {
         redirect_uri: req.body.redirectUri,
         code: req.body.code,
         grant_type: 'authorization_code',
-        client_secret: config.GOOGLE_CLIENT_SECRET
+        client_secret: config.GOOGLE_APP_SECRET
 
     };
     request.post(url, {
         json: true,
         form: params
     }, function (err, response, token) {
-        console.log(token);
+
         var accessToken = token.access_token;
         var headers = {
             Authorization: 'Bearer ' + accessToken
@@ -39,9 +40,22 @@ router.post('/google', function (req, res) {
         }, function (err, response, profile) {
 
             userController.findOrCreateUser(profile, res, token);
-        })
+        });
 
     });
+});
+
+
+router.post('/refreshToken', function(req, res){
+
+    if(req.headers && req.headers.authorization){
+
+        var token = req.headers.authorization.split(' ')[1];
+        var payload= jwt.decode(token, config.TOKEN_SECRET,config.SIGNING_ALGO );
+        userController.findUserAndSend(payload, res);
+    } else {
+        res.status(401).json({message: 'Missing authorization headers'});
+    }
 });
 
 module.exports = router;

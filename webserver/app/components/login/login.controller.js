@@ -2,29 +2,45 @@
 
 angular.module('myApp.login', ['ngRoute'])
 
-    .config(['$routeProvider', function ($routeProvider) {
+    .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/login', {
-            templateUrl: '/components/login/login.html',
-            controller: 'View2Ctrl'
+            templateUrl: 'components/login/login.html',
+            controller: 'LoginController'
         });
-
     }])
-    .controller('View2Ctrl', ['$scope', '$auth', function ($scope, $auth) {
+    .controller('LoginController', ['$scope', '$auth', 'userContext', '$rootScope',
+        function($scope, $auth, userContext, $rootScope) {
 
-        $scope.authenticated = !!$auth.isAuthenticated();
-        $scope.authenticate = function (provider) {
-
-            $auth.authenticate(provider).then(function (response) {
-
+            if($auth.isAuthenticated()){
                 $scope.authenticated = true;
-                $scope.user = response.data.user.name;
 
-            });
+            } else{
+                $scope.authenticated = false;
+            }
+            $scope.authenticate = function(provider){
 
-        };
+                $auth.authenticate(provider).then(function(response){
 
-        $scope.logOut = function () {
-            $scope.authenticated = false;
-            $auth.logout();
-        }
-    }]);
+                    $scope.authenticated = true;
+                    $scope.user = response.data.user;
+                    userContext.user = response.data.user;
+                    userContext.isAuthenticated = true;
+                    $rootScope.user = response.data.user;
+                });
+
+            };
+
+            $scope.logOut = function () {
+                $scope.authenticated = false;
+                $rootScope.user = null;
+                userContext.user = null;
+                userContext.isAuthenticated = false;
+                $auth.logout();
+            };
+
+            $rootScope.$watch('user', function(){
+                $scope.user = $rootScope.user;
+            }, true);
+
+            $scope.getUserName = userContext.getUserName;
+        }]);

@@ -9,7 +9,6 @@ var get = function (req, res) {
     Product.find().exec(function (err, results) {
         result = results;
         res.status(200).json(result);
-        console.log(results);
     });
 };
 
@@ -23,7 +22,6 @@ var post = function (req, res) {
     });
 
     entry.save();
-    console.log(entry);
 
     res.status(301).json('posted sucessfully');
 };
