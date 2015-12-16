@@ -5,7 +5,7 @@ angular.module('myApp', [
   'ngRoute',
   'satellizer',
   'myApp.view1',
-  'myApp.view2',
+  'myApp.login',
   'myApp.details'
 
 ]).
