@@ -6,6 +6,8 @@ var request = require('request');
 var userController = require('./user.server.controller.js');
 var router = express.Router();
 
+var config = require('../config/config.js');
+
 router.post('/google', function (req, res) {
     var url = "https://accounts.google.com/o/oauth2/token";
     var apiUrl = 'https://www.googleapis.com/plus/v1/people/me/openIdConnect';
@@ -15,7 +17,7 @@ router.post('/google', function (req, res) {
         redirect_uri: req.body.redirectUri,
         code: req.body.code,
         grant_type: 'authorization_code',
-        client_secret: 'z7EMpJzu2Suetzq4LCqlnJLF'
+        client_secret: config.GOOGLE_CLIENT_SECRET
 
     };
     request.post(url, {
